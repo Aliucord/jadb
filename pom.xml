@@ -49,6 +49,14 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>aliucord</id>
+            <name>Aliucord Maven</name>
+            <url>https://maven.aliucord.com/snapshots</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
