@@ -4,22 +4,19 @@
 name: Java CI with Maven
 
 on:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 8 
-      uses: actions/setup-java@v2
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-        cache: maven
-    - name: maven
-      run: |
-        echo "<settings><servers><server><id>aliucord</id><username>${{ secrets.MAVEN_USERNAME }}</username><password>${{ secrets.MAVEN_PASSWORD }}</password></server></servers></settings>" > ~/.m2/settings.xml
-        mvn -B deploy --file pom.xml
+      - uses: actions/checkout@v2
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+      - name: maven
+        run: |
+          echo "<settings><servers><server><id>aliucord</id><username>${{ secrets.MAVEN_RELEASE_USERNAME }}</username><password>${{ secrets.MAVEN_RELEASE_PASSWORD }}</password></server></servers></settings>" > ~/.m2/settings.xml
+          mvn -B deploy --file pom.xml
